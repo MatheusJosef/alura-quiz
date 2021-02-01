@@ -14,6 +14,11 @@ import BackLinkArrow from '../../components/BackLinkArrow';
 import loadingAnimation from './animations/loading.json';
 
 function ResultWidget({ results }) {
+  const correctAnswersCount = results.filter((x) => x).length;
+  const correctAnswerText = correctAnswersCount === 1
+    ? 'Você acertou 1 pergunta'
+    : `Você acertou ${correctAnswersCount} perguntas`;
+
   return (
     <Widget>
       <Widget.Header>
@@ -22,24 +27,20 @@ function ResultWidget({ results }) {
       </Widget.Header>
 
       <Widget.Content>
-        <QuizProgressBar total={results.length} fill={results.filter((x) => x).length} />
+        <QuizProgressBar total={results.length} fill={correctAnswersCount} />
         <p>
-          Você acertou
-          {' '}
-          {results.filter((x) => x).length}
-          {' '}
-          perguntas
+          {correctAnswerText}
         </p>
         <ul>
           {results.map((result, index) => (
-            <li key={`result__${result}`}>
+            <li key={`result__${index + 1}`}>
               #
               {index + 1}
               {' '}
               Resultado:
               {result === true
-                ? 'Acertou'
-                : 'Errou'}
+                ? ' Acertou'
+                : ' Errou'}
             </li>
           ))}
         </ul>

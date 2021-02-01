@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Widget = styled.div`
   margin-top: 24px;
@@ -53,10 +53,20 @@ Widget.Topic = styled.a`
   background-color: ${({ theme }) => `${theme.colors.primary}40`};
   padding: 10px 15px;
   margin-bottom: 8px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   border-radius: ${({ theme }) => theme.borderRadius};
   transition: .3s;
   display: block;
+  ${({ disabled }) => (
+    disabled ? css`
+      cursor: not-allowed;
+      background-color: ${({ theme }) => `${theme.colors.primary}20`};
+      `
+      : css`
+      cursor: pointer;
+      `
+  )};
+
 
   &:hover,
   &:focus {

@@ -66,7 +66,7 @@ export default function Home() {
                 value={name}
               />
               <Button type="submit" disabled={name.length === 0}>
-                {`Jogar ${name}`}
+                Jogar
               </Button>
             </form>
           </Widget.Content>
@@ -97,7 +97,8 @@ export default function Home() {
                   <li key={linkExterno}>
                     <Widget.Topic
                       as={Link}
-                      href={`/quiz/${projectName}___${githubUser}`}
+                      href={name.length === 0 ? '/' : `/quiz/${projectName}___${githubUser}`}
+                      disabled={name.length === 0}
                     >
                       {`${githubUser}/${projectName}`}
                     </Widget.Topic>
