@@ -6,6 +6,7 @@ import Widget from '../../components/Widget';
 import QuizLogo from '../../components/QuizLogo';
 import QuizBackground from '../../components/QuizBackground';
 import QuizContainer from '../../components/QuizContainer';
+import QuizProgressBar from '../../components/QuizProgressBar';
 import AlternativesForm from '../../components/AlterinativesForm';
 import Button from '../../components/Button';
 import BackLinkArrow from '../../components/BackLinkArrow';
@@ -21,6 +22,7 @@ function ResultWidget({ results }) {
       </Widget.Header>
 
       <Widget.Content>
+        <QuizProgressBar total={results.length} fill={results.filter((x) => x).length} />
         <p>
           Você acertou
           {' '}
@@ -97,6 +99,7 @@ function QuestionWidget({
         src={question.image}
       />
       <Widget.Content>
+        <QuizProgressBar total={totalQuestions} fill={questionIndex + 1} />
         <h2>
           {question.title}
         </h2>
@@ -144,6 +147,7 @@ function QuestionWidget({
           </Button>
           {isQuestionSubmited && isCorrect && <p>Você acertou!</p>}
           {isQuestionSubmited && !isCorrect && <p>Você errou!</p>}
+
         </AlternativesForm>
       </Widget.Content>
     </Widget>
